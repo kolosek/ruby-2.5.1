@@ -34,6 +34,7 @@ RUN \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list && \
   apt-get update -yq && \
   apt-get install -y yarn
+  yarn install
 
 # Install dpl and heroku-cli
 RUN \
