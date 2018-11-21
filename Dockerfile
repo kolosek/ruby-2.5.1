@@ -11,7 +11,10 @@ RUN \
     cmake \
     nodejs \
     software-properties-common \
-    unzip
+    unzip \
+    xvfb \
+    libfontconfig \
+    wkhtmltopdf
 
 # Install yarn
 RUN \
@@ -32,7 +35,7 @@ RUN \
 
 # Install chromedriver
 RUN \
-  wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip && \
+  wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/2.43/chromedriver_linux64.zip && \
   unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ && \
   rm /tmp/chromedriver.zip && \
   chmod ugo+rx /usr/bin/chromedriver
