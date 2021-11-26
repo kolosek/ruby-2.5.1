@@ -48,14 +48,22 @@ RUN \
   apt-get update -yq && \
   apt-get install heroku -y && \
   gem install dpl
+  
+# Install codeclimate test reporter
+RUN curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+RUN chmod +x ./cc-test-reporter
 
 # see update.sh for why all "apt-get install"s have to stay as one long line
 RUN apt-get update && apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
+
+RUN npm install
 
 # see http://guides.rubyonrails.org/command_line.html#rails-dbconsole
 RUN apt-get update && apt-get install -y mysql-client postgresql-client sqlite3 --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 ENV RAILS_VERSION 5.2.0
+
+# Install gems
 
 RUN gem install rails --version "$RAILS_VERSION"
 
@@ -66,7 +74,3 @@ RUN gem update --system
 RUN gem install specific_install
 
 RUN gem specific_install -l https://github.com/kolosek/test-boosters
-
-RUN gem install dpl
-
-RUN npm install
