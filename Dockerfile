@@ -14,6 +14,7 @@ RUN \
     unzip \
     xvfb \
     libfontconfig \
+    libjpeg-dev \
     wkhtmltopdf
 
 # Install yarn
@@ -57,3 +58,13 @@ RUN apt-get update && apt-get install -y mysql-client postgresql-client sqlite3 
 ENV RAILS_VERSION 5.2.0
 
 RUN gem install rails --version "$RAILS_VERSION"
+
+RUN gem update bundler
+
+RUN gem update --system
+
+RUN gem install specific_install
+
+RUN gem specific_install -l https://github.com/kolosek/test-boosters
+
+RUN npm install
